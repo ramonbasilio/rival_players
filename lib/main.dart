@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rival_players_demo/login-page.dart';
+import 'package:rival_players_demo/signup-page.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rival_players_demo/signup-page.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -14,10 +15,15 @@ class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(20),
+          child: AppBar(
+            backgroundColor: const Color.fromARGB(255, 38, 38, 38),
+          )),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            height: 800,
+            //height: 789,
             color: const Color.fromARGB(255, 191, 191, 191),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -110,6 +116,29 @@ class _loginPageState extends State<loginPage> {
                             ),
                           ),
                         ), //LOGIN
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 130.0, bottom: 9.0),
+                          child: SizedBox(
+                            width: 320,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 40, 0, 77),
+                                foregroundColor: Colors.white,
+                                side: const BorderSide(color: Colors.black),
+                              ),
+                              onPressed: () async {
+                                print('Apertou o botao');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => pageSignUp()));
+                              },
+                              child: Text('Sign-up now!'),
+                            ),
+                          ),
+                        ), //SIGN-UP
                       ],
                     ),
                   )
