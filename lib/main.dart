@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rival_players_demo/leading-page-menu.dart';
+import 'package:rival_players_demo/leading-page.dart';
 import 'package:rival_players_demo/login-page.dart';
 import 'package:rival_players_demo/signup-page.dart';
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: const loginPage(),
+      home: const leadingPageMenu(),
     );
   }
 }
