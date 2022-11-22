@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rival_players_demo/leading-page-menu.dart';
 import 'package:rival_players_demo/signup-page.dart';
 
 class loginPage extends StatefulWidget {
@@ -29,8 +30,11 @@ class _loginPageState extends State<loginPage> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  ClipRRect(
-                    child: Image.asset('assets/img/logo_rival_players.png'),
+                  Container(
+                    color: Colors.black,
+                    child: ClipRRect(
+                      child: Image.asset('assets/img/logo_rival_players.png'),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -110,7 +114,7 @@ class _loginPageState extends State<loginPage> {
                                 side: const BorderSide(color: Colors.black),
                               ),
                               onPressed: () {
-                                print('Apertou o botao');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => leadingPageMenu()));
                               },
                               child: Text('Login'),
                             ),
@@ -130,10 +134,7 @@ class _loginPageState extends State<loginPage> {
                               ),
                               onPressed: () async {
                                 print('Apertou o botao');
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => pageSignUp()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
                               },
                               child: Text('Sign-up now!'),
                             ),

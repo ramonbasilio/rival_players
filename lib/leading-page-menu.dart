@@ -10,8 +10,8 @@ class leadingPageMenu extends StatefulWidget {
   State<leadingPageMenu> createState() => _leadingPageMenuState();
 }
 
-double topPadding = 35.0;
-double bottomPadding = 35.0;
+double topPadding = 10.0;
+double bottomPadding = 10.0;
 double rightPadding = 10.0;
 double leftPadding = 10.0;
 
@@ -20,7 +20,9 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 38, 38, 38),
+        centerTitle: true,
+        backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
+        //shadowColor: const Color.fromRGBO(38, 38, 38, 1),
         iconTheme: const IconThemeData(color: Colors.white),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,117 +34,240 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
           ],
         ),
       ),
-      drawer: Padding(
-        padding: const EdgeInsets.only(top: 56.0),
-        child: Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: ListView(
-            children: [
-              UserAccountsDrawerHeader(
-                  accountName: Text(
-                    'Ramon Basilio',
-                    style: GoogleFonts.acme(fontSize: 25, color: Colors.black),
-                  ),
-                  accountEmail: Text(
-                    'ramon.basilio@hotmail.com',
-                    style: GoogleFonts.acme(fontSize: 15, color: Colors.black),
-                  )),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 60.0,
-                right: rightPadding,
-                left: leftPadding,
-                bottom: bottomPadding),
-                child: ListTile(
-                  leading: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'ID: drBasilioBR ',
-                        style:
-                            GoogleFonts.acme(fontSize: 20, color: Colors.black),
-                      ),
-                      Text(
-                        'Xbox Live ',
-                        style:
-                            GoogleFonts.acme(fontSize: 15, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding:EdgeInsets.only(
-                  top: topPadding,
+      drawer: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: ListView(
+              //padding: EdgeInsets.zero,
+              children: [
+                UserAccountsDrawerHeader(
+                    accountName: Text(
+                      'Ramon Basilio',
+                      style: GoogleFonts.acme(fontSize: 25, color: Colors.black),
+                    ),
+                    accountEmail: Text(
+                      'ramon.basilio@hotmail.com',
+                      style: GoogleFonts.acme(fontSize: 15, color: Colors.black),
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: 60.0,
                   right: rightPadding,
                   left: leftPadding,
                   bottom: bottomPadding),
-                child: ListTile(
-                  title: Text(
-                    'Historic',
-                    style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                  child: ListTile(
+                    leading: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'ID: drBasilioBR ',
+                          style:
+                              GoogleFonts.acme(fontSize: 20, color: Colors.black),
+                        ),
+                        Text(
+                          'Xbox Live ',
+                          style:
+                              GoogleFonts.acme(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
+                Padding(
+                  padding:EdgeInsets.only(
+                    top: topPadding,
+                    right: rightPadding,
+                    left: leftPadding,
+                    bottom: bottomPadding),
+                  child: ListTile(
+                    title: Text(
+                      'Historic',
+                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: topPadding,
+                        right: rightPadding,
+                        left: leftPadding,
+                        bottom: bottomPadding),
+                  child: ListTile(
+                    title: Text(
+                      'Credit',
+                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                    ),
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsets.only(
                       top: topPadding,
                       right: rightPadding,
                       left: leftPadding,
                       bottom: bottomPadding),
-                child: ListTile(
-                  title: Text(
-                    'Credit',
-                    style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                  child: ListTile(
+                    title: Text(
+                      'Ranking',
+                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: topPadding,
-                    right: rightPadding,
-                    left: leftPadding,
-                    bottom: bottomPadding),
-                child: ListTile(
-                  title: Text(
-                    'Ranking',
-                    style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: topPadding,
+                      right: rightPadding,
+                      left: leftPadding,
+                      bottom: bottomPadding),
+                  child: ListTile(
+                    title: Text(
+                      'Options',
+                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: topPadding,
-                    right: rightPadding,
-                    left: leftPadding,
-                    bottom: bottomPadding),
-                child: ListTile(
-                  title: Text(
-                    'Options',
-                    style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: topPadding,
+                      right: rightPadding,
+                      left: leftPadding,
+                      bottom: bottomPadding),
+                  child: ListTile(
+                    onTap: (){
+                      Navigator.popUntil(context, ModalRoute.withName('/'));
+                    },
+                    title: Text(
+                      'Logout',
+                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: topPadding,
-                    right: rightPadding,
-                    left: leftPadding,
-                    bottom: bottomPadding),
-                child: ListTile(
-                  onTap: (){
-                    Navigator.pop(context);
-                  },
-                  title: Text(
-                    'Logout',
-                    style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                  const Color.fromARGB(255, 40, 0, 77),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black),
+                ),
+                onPressed: () async {
+                  print('Apertou o botao');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                },
+                child: Text(
+                  'CREATE AN EVENT',
+                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                  const Color.fromARGB(255, 40, 0, 77),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black),
+                ),
+                onPressed: () async {
+                  print('Apertou o botao');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                },
+                child: Text(
+                  'START A FIGHT',
+                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                  const Color.fromARGB(255, 40, 0, 77),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black),
+                ),
+                onPressed: () async {
+                  print('Apertou o botao');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                },
+                child: Text(
+                  'SEARCH A PLAYER',
+                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                  const Color.fromARGB(255, 40, 0, 77),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black),
+                ),
+                onPressed: () async {
+                  print('Apertou o botao');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                },
+                child: Text(
+                  'NOTIFICATIONS',
+                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                  const Color.fromARGB(255, 40, 0, 77),
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black),
+                ),
+                onPressed: () async {
+                  print('Apertou o botao');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                },
+                child: Text(
+                  'HELP',
+                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
