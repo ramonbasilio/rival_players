@@ -59,7 +59,8 @@ class _loginPageState extends State<loginPage> {
                               ),
                             ),
                             onChanged: (value) {
-                              login = value;
+                              setState(() {
+                              });;
                             },
                           ),
                         ), // EMAIL

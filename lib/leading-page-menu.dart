@@ -149,125 +149,127 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 40, 0, 77),
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black),
-                ),
-                onPressed: () async {
-                  print('Apertou o botao');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
-                },
-                child: Text(
-                  'CREATE AN EVENT',
-                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 40, 0, 77),
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black),
-                ),
-                onPressed: () async {
-                  print('Apertou o botao');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
-                },
-                child: Text(
-                  'START A FIGHT',
-                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    const Color.fromARGB(255, 40, 0, 77),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black),
+                  ),
+                  onPressed: () async {
+                    print('Apertou o botao');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                  },
+                  child: Text(
+                    'CREATE AN EVENT',
+                    style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 40, 0, 77),
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black),
-                ),
-                onPressed: () async {
-                  print('Apertou o botao');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
-                },
-                child: Text(
-                  'SEARCH A PLAYER',
-                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 40, 0, 77),
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black),
-                ),
-                onPressed: () async {
-                  print('Apertou o botao');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
-                },
-                child: Text(
-                  'NOTIFICATIONS',
-                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    const Color.fromARGB(255, 40, 0, 77),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black),
+                  ),
+                  onPressed: () async {
+                    print('Apertou o botao');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                  },
+                  child: Text(
+                    'START A FIGHT',
+                    style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                  const Color.fromARGB(255, 40, 0, 77),
-                  foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black),
-                ),
-                onPressed: () async {
-                  print('Apertou o botao');
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
-                },
-                child: Text(
-                  'HELP',
-                  style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    const Color.fromARGB(255, 40, 0, 77),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black),
+                  ),
+                  onPressed: () async {
+                    print('Apertou o botao');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                  },
+                  child: Text(
+                    'SEARCH A PLAYER',
+                    style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    const Color.fromARGB(255, 40, 0, 77),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black),
+                  ),
+                  onPressed: () async {
+                    print('Apertou o botao');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                  },
+                  child: Text(
+                    'NOTIFICATIONS',
+                    style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    const Color.fromARGB(255, 40, 0, 77),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black),
+                  ),
+                  onPressed: () async {
+                    print('Apertou o botao');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                  },
+                  child: Text(
+                    'HELP',
+                    style: GoogleFonts.acme(fontSize: 24, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
