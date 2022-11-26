@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "855244658078",
+    "project_id": "rival-players",
+    "storage_bucket": "rival-players.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855244658078:android:454f21b37ef49e483af28f",
+        "android_client_info": {
+          "package_name": "com.example.rival_players_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855244658078-jn3l5kt5ackc26q5i4p4dau1is47phh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASQn9EYUQ8AqqYG48saoQl-W8wd29ShWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855244658078-jn3l5kt5ackc26q5i4p4dau1is47phh6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "855244658078-po8o73v37l45213rcgij7ai9uh3ne0pl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rivalPlayersDemo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

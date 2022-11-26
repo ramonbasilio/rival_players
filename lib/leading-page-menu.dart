@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rival_players_demo/checking-page-user.dart';
 import 'package:rival_players_demo/login-page.dart';
 import 'package:rival_players_demo/signup-page.dart';
 
@@ -15,7 +17,16 @@ double bottomPadding = 10.0;
 double rightPadding = 10.0;
 double leftPadding = 10.0;
 
+String nome = '';
+String email = '';
+
 class _leadingPageMenuState extends State<leadingPageMenu> {
+  final _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    pegarUsuario();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,61 +55,63 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
               //padding: EdgeInsets.zero,
               children: [
                 UserAccountsDrawerHeader(
-                    accountName: Text(
-                      'Ramon Basilio',
-                      style: GoogleFonts.acme(fontSize: 25, color: Colors.black),
+                    accountName: Text(nome,
+                      style:
+                          GoogleFonts.acme(fontSize: 25, color: Colors.black),
                     ),
-                    accountEmail: Text(
-                      'ramon.basilio@hotmail.com',
-                      style: GoogleFonts.acme(fontSize: 15, color: Colors.black),
+                    accountEmail: Text(email,
+                      style:
+                          GoogleFonts.acme(fontSize: 15, color: Colors.black),
                     )),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: 60.0,
-                  right: rightPadding,
-                  left: leftPadding,
-                  bottom: bottomPadding),
+                      top: 60.0,
+                      right: rightPadding,
+                      left: leftPadding,
+                      bottom: bottomPadding),
                   child: ListTile(
                     leading: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'ID: drBasilioBR ',
-                          style:
-                              GoogleFonts.acme(fontSize: 20, color: Colors.black),
+                          style: GoogleFonts.acme(
+                              fontSize: 20, color: Colors.black),
                         ),
                         Text(
                           'Xbox Live ',
-                          style:
-                              GoogleFonts.acme(fontSize: 15, color: Colors.black),
+                          style: GoogleFonts.acme(
+                              fontSize: 15, color: Colors.black),
                         ),
                       ],
                     ),
                   ),
                 ),
                 Padding(
-                  padding:EdgeInsets.only(
-                    top: topPadding,
-                    right: rightPadding,
-                    left: leftPadding,
-                    bottom: bottomPadding),
+                  padding: EdgeInsets.only(
+                      top: topPadding,
+                      right: rightPadding,
+                      left: leftPadding,
+                      bottom: bottomPadding),
                   child: ListTile(
                     title: Text(
                       'Historic',
-                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                      style:
+                          GoogleFonts.acme(fontSize: 24, color: Colors.black),
                     ),
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(
-                        top: topPadding,
-                        right: rightPadding,
-                        left: leftPadding,
-                        bottom: bottomPadding),
+                  padding: EdgeInsets.only(
+                      top: topPadding,
+                      right: rightPadding,
+                      left: leftPadding,
+                      bottom: bottomPadding),
                   child: ListTile(
                     title: Text(
                       'Credit',
-                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                      style:
+                          GoogleFonts.acme(fontSize: 24, color: Colors.black),
                     ),
                   ),
                 ),
@@ -111,7 +124,8 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                   child: ListTile(
                     title: Text(
                       'Ranking',
-                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                      style:
+                          GoogleFonts.acme(fontSize: 24, color: Colors.black),
                     ),
                   ),
                 ),
@@ -124,7 +138,8 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                   child: ListTile(
                     title: Text(
                       'Options',
-                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                      style:
+                          GoogleFonts.acme(fontSize: 24, color: Colors.black),
                     ),
                   ),
                 ),
@@ -135,12 +150,13 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                       left: leftPadding,
                       bottom: bottomPadding),
                   child: ListTile(
-                    onTap: (){
-                      Navigator.popUntil(context, ModalRoute.withName('/'));
+                    onTap: () {
+                     sair();
                     },
                     title: Text(
                       'Logout',
-                      style: GoogleFonts.acme(fontSize: 24, color: Colors.black),
+                      style:
+                          GoogleFonts.acme(fontSize: 24, color: Colors.black),
                     ),
                   ),
                 ),
@@ -160,14 +176,14 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                 height: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 40, 0, 77),
+                    backgroundColor: const Color.fromARGB(255, 40, 0, 77),
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.black),
                   ),
                   onPressed: () async {
                     print('Apertou o botao');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => pageSignUp()));
                   },
                   child: Text(
                     'CREATE AN EVENT',
@@ -183,14 +199,14 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                 height: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 40, 0, 77),
+                    backgroundColor: const Color.fromARGB(255, 40, 0, 77),
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.black),
                   ),
                   onPressed: () async {
                     print('Apertou o botao');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => pageSignUp()));
                   },
                   child: Text(
                     'START A FIGHT',
@@ -206,14 +222,14 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                 height: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 40, 0, 77),
+                    backgroundColor: const Color.fromARGB(255, 40, 0, 77),
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.black),
                   ),
                   onPressed: () async {
                     print('Apertou o botao');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => pageSignUp()));
                   },
                   child: Text(
                     'SEARCH A PLAYER',
@@ -229,14 +245,14 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                 height: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 40, 0, 77),
+                    backgroundColor: const Color.fromARGB(255, 40, 0, 77),
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.black),
                   ),
                   onPressed: () async {
                     print('Apertou o botao');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => pageSignUp()));
                   },
                   child: Text(
                     'NOTIFICATIONS',
@@ -252,14 +268,14 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
                 height: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    const Color.fromARGB(255, 40, 0, 77),
+                    backgroundColor: const Color.fromARGB(255, 40, 0, 77),
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.black),
                   ),
                   onPressed: () async {
                     print('Apertou o botao');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => loginPage()));
                   },
                   child: Text(
                     'HELP',
@@ -272,5 +288,26 @@ class _leadingPageMenuState extends State<leadingPageMenu> {
         ),
       ),
     );
+  }
+
+  sair() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => checkingPage(),
+            ),
+          ),
+        );
+  }
+
+  pegarUsuario() async{
+    User? usuario = await _firebaseAuth.currentUser;
+    if(usuario != null){
+      setState(() {
+        nome = usuario.displayName!;
+        email =  usuario.email!;
+      });
+    }
   }
 }

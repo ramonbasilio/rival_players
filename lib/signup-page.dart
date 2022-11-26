@@ -1,5 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rival_players_demo/checking-page-user.dart';
 import 'package:rival_players_demo/leading-page-menu.dart';
 
 class pageSignUp extends StatefulWidget {
@@ -22,8 +26,11 @@ class _pageSignUpState extends State<pageSignUp> {
   bool _isHidden = true;
   bool _isHiddenConfirmationPassword = true;
 
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmationController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordConfirmationController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
 
   bool valueValitador(String? value) {
     if (value != null && value.isEmpty) {
@@ -32,19 +39,20 @@ class _pageSignUpState extends State<pageSignUp> {
     return false;
   }
 
-  bool validateStructure(String value){
-      String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-      RegExp regExp = RegExp(pattern);
-      return regExp.hasMatch(value);
+  bool validateStructure(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = RegExp(pattern);
+    return !regExp.hasMatch(value);
   }
 
-  void _togglePasswordView(){
+  void _togglePasswordView() {
     setState(() {
       _isHidden = !_isHidden;
     });
   }
 
-  void _togglePasswordViewConfirmationPassword(){
+  void _togglePasswordViewConfirmationPassword() {
     setState(() {
       _isHiddenConfirmationPassword = !_isHiddenConfirmationPassword;
     });
@@ -71,7 +79,10 @@ class _pageSignUpState extends State<pageSignUp> {
         child: Form(
           key: _formKey,
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             color: const Color.fromARGB(255, 191, 191, 191),
             child: Column(
               children: [
@@ -87,6 +98,7 @@ class _pageSignUpState extends State<pageSignUp> {
                   padding: const EdgeInsets.only(
                       top: 20.0, right: 10.0, left: 10.0, bottom: 10.0),
                   child: TextFormField(
+                    controller: _nameController,
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return 'Insira um nome';
@@ -98,18 +110,19 @@ class _pageSignUpState extends State<pageSignUp> {
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.people),
                         labelStyle:
-                            TextStyle(fontSize: 20, color: Colors.black),
+                        TextStyle(fontSize: 20, color: Colors.black),
                         labelText: 'Player Name',
                         contentPadding: EdgeInsets.symmetric(horizontal: 20),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Colors.black))),
+                            BorderSide(width: 1, color: Colors.black))),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 20.0, right: 10.0, left: 10.0, bottom: 10.0),
                   child: TextFormField(
+                    controller: _emailController,
                     validator: (String? value) {
                       if (value == null ||
                           !(value.contains('@') && value.contains('.com'))) {
@@ -122,12 +135,12 @@ class _pageSignUpState extends State<pageSignUp> {
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.mail_rounded),
                         labelStyle:
-                            TextStyle(fontSize: 20, color: Colors.black),
+                        TextStyle(fontSize: 20, color: Colors.black),
                         labelText: 'E-mail',
                         contentPadding: EdgeInsets.symmetric(horizontal: 20),
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Colors.black))),
+                            BorderSide(width: 1, color: Colors.black))),
                   ),
                 ),
 
@@ -135,29 +148,32 @@ class _pageSignUpState extends State<pageSignUp> {
                   padding: const EdgeInsets.only(
                       top: 20.0, right: 10.0, left: 10.0, bottom: 10.0),
                   child: TextFormField(
-                    controller: passwordController,
-                    validator: (String? valuePassword){
-                      if(validateStructure(valuePassword!)){
-                        return null;
-                        }
-                      return 'Insira uma senha';
+                    controller: _passwordController,
+                    validator: (String? valuePassword) {
+                      if (validateStructure(valuePassword!)) {
+                        return 'Insira uma senha';
+                      }
+                      return null;
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     obscureText: _isHidden,
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
-                          icon: Icon(_isHidden ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isHidden
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: _togglePasswordView,
                         ),
                         prefixIcon: const Icon(Icons.password),
                         labelStyle:
-                            const TextStyle(fontSize: 20, color: Colors.black),
+                        const TextStyle(fontSize: 20, color: Colors.black),
                         labelText: 'Password',
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                        contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 20),
                         enabledBorder: const OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Colors.black))),
+                            BorderSide(width: 1, color: Colors.black))),
                   ),
                 ),
 
@@ -165,28 +181,34 @@ class _pageSignUpState extends State<pageSignUp> {
                   padding: const EdgeInsets.only(
                       top: 20.0, right: 10.0, left: 10.0, bottom: 10.0),
                   child: TextFormField(
-                    validator: (String? value){
-                      if(validateStructure(value!)){
-                        return null;
+                    controller: _passwordController,
+                    validator: (String? value) {
+                      if (validateStructure(value!)) {
+                        return 'Insira uma senha';
+                      } else if (value != _passwordController.text) {
+                        return 'Senhas diferentes';
                       }
-                      return 'Insira uma senha';
+                      return null;
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     obscureText: _isHiddenConfirmationPassword,
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
-                          icon: Icon(_isHiddenConfirmationPassword ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isHiddenConfirmationPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: _togglePasswordViewConfirmationPassword,
                         ),
                         prefixIcon: const Icon(Icons.password),
                         labelStyle:
-                            const TextStyle(fontSize: 20, color: Colors.black),
+                        const TextStyle(fontSize: 20, color: Colors.black),
                         labelText: 'Confirmation Password',
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                        contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 20),
                         enabledBorder: const OutlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: Colors.black))),
+                            BorderSide(width: 1, color: Colors.black))),
                   ),
                 ),
                 //Name
@@ -195,11 +217,10 @@ class _pageSignUpState extends State<pageSignUp> {
                   padding: EdgeInsets.only(
                       top: 5.0, right: 10.0, left: 10.0, bottom: 10.0),
                   child: Text(
-                    '''Your password must have at least 8 characters, with:
+                      '''Your password must have at least 8 characters, with:
                      - 1 uppercase character
                      - 1 special character !@#\$&*~
-                     - 1 number'''
-                  ),
+                     - 1 number'''),
                 ),
 
                 Padding(
@@ -209,17 +230,17 @@ class _pageSignUpState extends State<pageSignUp> {
                       decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.videogame_asset_outlined),
                           labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
+                          TextStyle(fontSize: 20, color: Colors.black),
                           labelText: 'User Platform ',
                           contentPadding: EdgeInsets.symmetric(horizontal: 20),
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                                  BorderSide(width: 1, color: Colors.black))),
+                              BorderSide(width: 1, color: Colors.black))),
                       value: dropdownValue,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         setState(
-                          () {
+                              () {
                             dropdownValue = value!;
                           },
                         );
@@ -251,10 +272,10 @@ class _pageSignUpState extends State<pageSignUp> {
                           decoration: const InputDecoration(
                               prefixIcon: Icon(Icons.videogame_asset_outlined),
                               labelStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                               labelText: 'ID - Xbox',
                               contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 20),
+                              EdgeInsets.symmetric(horizontal: 20),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 1, color: Colors.black))),
@@ -263,7 +284,6 @@ class _pageSignUpState extends State<pageSignUp> {
                     },
                     if (dropdownValue == dropOpcoes[1]) ...{
                       Padding(
-
                         padding: const EdgeInsets.only(
                             top: 20.0, right: 10.0, left: 10.0, bottom: 10.0),
                         child: TextFormField(
@@ -279,10 +299,10 @@ class _pageSignUpState extends State<pageSignUp> {
                           decoration: const InputDecoration(
                               prefixIcon: Icon(Icons.videogame_asset_outlined),
                               labelStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                               labelText: 'ID - PSN',
                               contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 20),
+                              EdgeInsets.symmetric(horizontal: 20),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 1, color: Colors.black))),
@@ -306,17 +326,18 @@ class _pageSignUpState extends State<pageSignUp> {
                                 }
                                 return null;
                               },
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                              AutovalidateMode.onUserInteraction,
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 20),
                               decoration: const InputDecoration(
                                   prefixIcon:
-                                      Icon(Icons.videogame_asset_outlined),
+                                  Icon(Icons.videogame_asset_outlined),
                                   labelStyle: TextStyle(
                                       fontSize: 20, color: Colors.black),
                                   labelText: 'ID - Xbox',
                                   contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 20),
+                                  EdgeInsets.symmetric(horizontal: 20),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 1, color: Colors.black))),
@@ -335,17 +356,18 @@ class _pageSignUpState extends State<pageSignUp> {
                                 }
                                 return null;
                               },
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              autovalidateMode:
+                              AutovalidateMode.onUserInteraction,
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 20),
                               decoration: const InputDecoration(
                                   prefixIcon:
-                                      Icon(Icons.videogame_asset_outlined),
+                                  Icon(Icons.videogame_asset_outlined),
                                   labelStyle: TextStyle(
                                       fontSize: 20, color: Colors.black),
                                   labelText: 'ID - PSN',
                                   contentPadding:
-                                      EdgeInsets.symmetric(horizontal: 20),
+                                  EdgeInsets.symmetric(horizontal: 20),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           width: 1, color: Colors.black))),
@@ -367,11 +389,7 @@ class _pageSignUpState extends State<pageSignUp> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const leadingPageMenu()));
+                        cadastrar();
                       }
                     },
                     child: const Text('Save registration'),
@@ -383,5 +401,36 @@ class _pageSignUpState extends State<pageSignUp> {
         ),
       ),
     );
+  }
+
+  cadastrar() async {
+    try {
+      UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+      if (userCredential != null) {
+        userCredential.user!.updateDisplayName(_nameController.text);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const checkingPage(),),);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Senha muito fraca'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+      else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Email já utilizado'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
   }
 }

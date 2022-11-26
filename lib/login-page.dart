@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rival_players_demo/leading-page-menu.dart';
 import 'package:rival_players_demo/signup-page.dart';
@@ -13,6 +14,13 @@ String login = '';
 String password = '';
 
 class _loginPageState extends State<loginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
+
+  String nome = '';
+  String email = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +51,7 @@ class _loginPageState extends State<loginPage> {
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: TextField(
+                            controller: _emailController,
                             style: const TextStyle(
                               color: Colors.black,
                             ),
@@ -59,8 +68,8 @@ class _loginPageState extends State<loginPage> {
                               ),
                             ),
                             onChanged: (value) {
-                              setState(() {
-                              });;
+                              setState(() {});
+                              ;
                             },
                           ),
                         ), // EMAIL
@@ -68,6 +77,7 @@ class _loginPageState extends State<loginPage> {
                           padding: const EdgeInsets.only(
                               top: 20.0, right: 20.0, left: 20.0),
                           child: TextField(
+                            controller: _passwordController,
                             style: const TextStyle(
                               color: Colors.black,
                             ),
@@ -94,7 +104,9 @@ class _loginPageState extends State<loginPage> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20.0),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+
+                                },
                                 child: const Text(
                                   "Forgot password?",
                                   style: TextStyle(color: Colors.black),
@@ -115,8 +127,13 @@ class _loginPageState extends State<loginPage> {
                                 side: const BorderSide(color: Colors.black),
                               ),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => leadingPageMenu()));
-                              },
+                                login();
+ /*                               Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            leadingPageMenu()));
+   */                           },
                               child: Text('Login'),
                             ),
                           ),
@@ -135,7 +152,10 @@ class _loginPageState extends State<loginPage> {
                               ),
                               onPressed: () async {
                                 print('Apertou o botao');
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => pageSignUp()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => pageSignUp()));
                               },
                               child: Text('Sign-up now!'),
                             ),
@@ -152,4 +172,35 @@ class _loginPageState extends State<loginPage> {
       ),
     );
   }
+
+  login() async {
+    try {
+      UserCredential userCredential =
+          await _firebaseAuth.signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      if (userCredential != null) {
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => leadingPageMenu()));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Usuario nao encontrado'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Sua senha está errada'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
+  }
+
+
 }
